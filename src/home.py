@@ -1,4 +1,5 @@
 from os import system, name, path, getcwd
+from time import time
 from .inputdata import getInputData, viewGeneratedInputData
 from .outputdata import getOutputData, viewOrderedOutputData
 
@@ -85,26 +86,34 @@ while True:
             length = validateOption(
                 "\tIngresa la cantidad de datos, por defecto \033[93m100\033[0m: ")
 
+            start_time = time()
             if length != "":
                 getInputData(int(length))
             else:
                 getInputData(100)
+            end_time = round((time() - start_time), 6)
 
             clear()
 
             getFilePath('Input.txt')
+            print(
+                '\n\tTiempo de ejecucion: \033[94m{}seg\033[0m\n'.format(end_time))
 
         elif option_menu == 2:
             clear()
             output_option = outputMenu()
 
+            start_time = time()
             if output_option != "":
                 getOutputData(int(output_option))
             else:
                 getOutputData(1)
+            end_time = round((time() - start_time), 6)
 
             clear()
             getFilePath('Output.txt', 'Archivo Generado y Ordenado')
+            print(
+                '\n\tTiempo de ejecucion: \033[94m{}seg\033[0m\n'.format(end_time))
 
         elif option_menu == 3:
             clear()
