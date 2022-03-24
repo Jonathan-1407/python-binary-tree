@@ -36,15 +36,15 @@ while True:
     if option_menu == 1:
         clear()
 
-        print('Deseas ingresar la cantidad de datos a generar?')
+        print('\tDeseas ingresar la cantidad de datos a generar?')
         print('\tPresiona (enter) para omitir')
         length = validateOption(
-            "Ingresa la cantidad de datos, por defecto \033[93m100\033[0m: ")
+            "\tIngresa la cantidad de datos, por defecto \033[93m100\033[0m: ")
 
         if length != "":
             getInputData(int(length))
         else:
-            getInputData()
+            getInputData(100)
 
         clear()
         dir_path = path.abspath(getcwd())
