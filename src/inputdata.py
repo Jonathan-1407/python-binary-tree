@@ -36,7 +36,7 @@ def generateCardId(length: int):
 
 
 def viewGeneratedInputData():
-    file = open(getenv('FILE_OUTPUT_PATH'), 'r')
+    file = open(getenv('FILE_INPUT_PATH'), 'r')
     print(file.read())
     file.close()
 
@@ -67,7 +67,7 @@ def generateData(length: int, gender: str):
 
 
 def getInputData(length: int = 100, gender: str = 'MIXED'):
-    file = open(getenv('FILE_OUTPUT_PATH'), 'w')
+    file = open(getenv('FILE_INPUT_PATH'), 'w')
     students = generateData(length, gender)
     random.shuffle(students)
 

@@ -1,12 +1,12 @@
 from os import system, name, path, getcwd
 from .inputdata import getInputData, viewGeneratedInputData
-from .outputdata import getOutputData
+from .outputdata import getOutputData, viewOrderedOutputData
 
 
 def drawWelcome():
-    print("▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀█ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▒█▀▀█ ▀█▀ ▒█▀▀▀█ ▒█▄░▒█ 　 ▀█▀ ▀█▀ ▀█▀")
-    print("▒█▄▄█ ▒█▄▄▀ ▒█░░▒█ ▒█░▄▄ ▒█▄▄▀ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ▒█░░░ ▒█░ ▒█░░▒█ ▒█▒█▒█ 　 ▒█░ ▒█░ ▒█░")
-    print("▒█░░░ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄█ ▒█░▒█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ▒█▄▄█ ▄█▄ ▒█▄▄▄█ ▒█░░▀█ 　 ▄█▄ ▄█▄ ▄█▄")
+    print("▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀█ ░█▀▀█ ▒█▀▄▀█ ░█▀▀█ ▒█▀▀█ ▀█▀ ▒█▀▀▀█ ▒█▄░▒█")
+    print("▒█▄▄█ ▒█▄▄▀ ▒█░░▒█ ▒█░▄▄ ▒█▄▄▀ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ▒█░░░ ▒█░ ▒█░░▒█ ▒█▒█▒█")
+    print("▒█░░░ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄█ ▒█░▒█ ▒█░▒█ ▒█░░▒█ ▒█░▒█ ▒█▄▄█ ▄█▄ ▒█▄▄▄█ ▒█░░▀█")
     print("")
 
 
@@ -33,7 +33,18 @@ def clear():
         _ = system('clear')
 
 
+clear()
 drawWelcome()
+
+
+def getFilePath(file_name: str, title: str = "Archivo Generado"):
+    dir_path = path.abspath(getcwd())
+
+    print(f'\033[92m\t === {title} ===\033[0m\n')
+    print(
+        '\tEl archivo se encuentra en: \n')
+    print(
+        f"\t\033[96m{dir_path}/public/files/{file_name}\033[0m\n")
 
 
 def menu():
@@ -51,6 +62,7 @@ def outputMenu():
     print("\t2 - Nombres y apellidos")
     print("\t3 - Carrera\n")
 
+    print('\t\tPresiona (\033[4menter\033[0m) para omitir')
     option = validateOption(
         "\tIngresa una opcion, por defecto \033[93mCarne\033[0m: ")
 
@@ -69,7 +81,7 @@ while True:
             clear()
 
             print('\tDeseas ingresar la cantidad de datos a generar?')
-            print('\tPresiona (enter) para omitir')
+            print('\t\tPresiona (\033[4menter\033[0m) para omitir')
             length = validateOption(
                 "\tIngresa la cantidad de datos, por defecto \033[93m100\033[0m: ")
 
@@ -79,29 +91,27 @@ while True:
                 getInputData(100)
 
             clear()
-            dir_path = path.abspath(getcwd())
 
-            print('\033[92m\t === Archivo Generado ===\033[0m\n')
-            print(
-                '\tEl archivo se encuentra en: \n')
-            print(
-                '\t\033[96m{}/public/files/Input.txt\033[0m\n'.format(dir_path))
+            getFilePath('Input.txt')
 
         elif option_menu == 2:
             clear()
             output_option = outputMenu()
 
-            if output_option == "1" or output_option == "2" or output_option == "3":
-                clear()
+            if output_option != "":
                 getOutputData(int(output_option))
             else:
-                clear()
-                output_option = 1
-                getOutputData(output_option)
+                getOutputData(1)
+
+            clear()
+            getFilePath('Output.txt', 'Archivo Generado y Ordenado')
 
         elif option_menu == 3:
             clear()
             viewGeneratedInputData()
+        elif option_menu == 4:
+            clear()
+            viewOrderedOutputData()
         elif option_menu == 5:
             clear()
             drawEndExcecution()
@@ -111,4 +121,4 @@ while True:
             print("\n *** Opcion no valida ***\n")
     except:
         clear()
-        print("** Ingresa un valor valido **")
+        print("\033[91m** Ingresa un valor valido **\033[0m\n")
