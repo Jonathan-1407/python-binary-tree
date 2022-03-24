@@ -1,4 +1,8 @@
+from os import getenv
+from dotenv import load_dotenv
 import random
+
+load_dotenv()
 
 
 # M -> Male or F -> Female
@@ -32,7 +36,7 @@ def generateCardId(length: int):
 
 
 def viewGeneratedInputData():
-    file = open('./public/files/Input.txt', 'r')
+    file = open(getenv('FILE_OUTPUT_PATH'), 'r')
     print(file.read())
     file.close()
 
@@ -45,14 +49,15 @@ def generateData(length: int, gender: str):
     for i in range(length):
         card_id = f"{generateCardId(5)}-{generateCardId(2)}-{generateCardId(5)}"
         first_names = generateNames(
-            f"{gender}", "./src/files/names/first.txt", 2)
+            f"{gender}", getenv('FILE_FIRST_NAMES_PATH'), 2)
         last_names = generateNames(
-            "", "./src/files/names/last.txt", 2)
+            "", getenv('FILE_LAST_NAMES_PATH'), 2)
         university_course = generateNames(
-            "", "./src/files/university/courses.txt", 1)
+            "", getenv('FILE_UNIVERSITY_COURSES_PATH'), 1)
 
         full_student = "{}|{}|{}|{};\n".format(
             card_id, first_names, last_names, university_course).upper()
+
         if i == mixed_length:
             gender = 'M'
 
@@ -62,7 +67,7 @@ def generateData(length: int, gender: str):
 
 
 def getInputData(length: int = 100, gender: str = 'MIXED'):
-    file = open('./public/files/Input.txt', 'w')
+    file = open(getenv('FILE_OUTPUT_PATH'), 'w')
     students = generateData(length, gender)
     random.shuffle(students)
 
