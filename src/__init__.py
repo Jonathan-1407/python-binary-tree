@@ -1,0 +1,1 @@
+from .inputdata import getInputData
