@@ -1,7 +1,21 @@
 from os import system, name, path, getcwd
+from pathlib import Path
 from time import time
 from .inputdata import getInputData, viewGeneratedInputData
 from .outputdata import getOutputData, viewOrderedOutputData
+
+
+def makeDefaultDirs():
+    path_dir = "public/files/"
+    path = Path(path_dir)
+    path.mkdir(parents=True, exist_ok=True)
+    inputFile = Path(f"{path_dir}Input.txt")
+    outputFile = Path(f"{path_dir}Output.txt")
+    inputFile.touch(exist_ok=True)
+    outputFile.touch(exist_ok=True)
+
+
+makeDefaultDirs()
 
 
 def drawWelcome():
