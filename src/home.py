@@ -20,11 +20,8 @@ def drawEndExcecution():
 
 
 def validateOption(message: str):
-    try:
-        option = input(message)
-        return option
-    except:
-        print("** Valor invalido **")
+    option = input(message)
+    return option
 
 
 def clear():
@@ -59,13 +56,13 @@ def menu():
 
 def outputMenu():
     print("\t==== Ordernar por? ====")
-    print("\t1 - Carne")
+    print("\t1 - Carnet")
     print("\t2 - Nombres y apellidos")
     print("\t3 - Carrera\n")
 
     print('\t\tPresiona (\033[4menter\033[0m) para omitir')
     option = validateOption(
-        "\tIngresa una opcion, por defecto \033[93mCarne\033[0m: ")
+        "\tIngresa una opcion, por defecto \033[93mCarnet\033[0m: ")
 
     return option
 
